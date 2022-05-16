@@ -80,7 +80,7 @@
                 loading.value = true
                 let origin = JSON.parse(JSON.stringify(data.fingerInfo));
                 let param_str = local2finger(origin)
-                saveFingerSuper(origin, param_str).then((res) => {
+                saveFinger(origin, param_str).then((res) => {
                     if (res.data.code === 200) {
                         message.value.success("指纹提交成功！")
                         data.fingerInfo = {
