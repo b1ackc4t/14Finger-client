@@ -208,9 +208,10 @@
                         time.value = Math.round(((end-start) / 1000)*100)/100
                         data.table_data1 = res.data.data.finger
                         data.table_data2 = res.data.data.spider
-
+                        isQuery.value = true
+                    } else {
+                        message.value.error("请先登录")
                     }
-                    isQuery.value = true
                     loading.value = false
                 }).catch((error) => {
                     isQuery.value = false

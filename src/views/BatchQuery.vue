@@ -126,6 +126,8 @@
                     if (res.data.code === 200) {
                         message.value.success("扫描任务添加成功！正在后台扫描")
 
+                    } else {
+                        message.value.error("请先登录")
                     }
                     loading.value = false
                 }).catch((error) => {

@@ -121,7 +121,7 @@
                     load()
                 }).catch((error) => {
                     loading.value = false
-                    message.value.error("hacker！不是管理员！")
+                    message.value.error("服务端错误，请重试！")
                 })
 
             }
@@ -140,7 +140,7 @@
                     loading.value = false
                 }).catch((error) => {
                     loading.value = false
-                    message.value.error("hacker！不是管理员！")
+                    message.value.error("服务端错误，请重试！")
 
                 })
             }

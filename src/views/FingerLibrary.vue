@@ -14,7 +14,7 @@
                         <a-input-search v-model="search.value" :style="{width:'200px'}" placeholder="搜索" search-button @search="searchSubmit"/>
                     </a-space>
                 </div>
-                <a-table :columns="columns" :data="data.table_data" :pagination="false"/>
+                <a-table :columns="columns" :data="data.table_data" :pagination="false" column-resizable/>
                 <div class="last-row">
                     <a-pagination :total="total" v-model:current="currentPage" v-model:page-size="pageSize" @change="changePage" show-total show-jumper/>
                 </div>
@@ -208,8 +208,8 @@
         justify-content: flex-end;
         /*margin-bottom: 14px;*/
     }
-    .last-row {
-        display: flex;
-        justify-content: flex-end;
-    }
+    /*.last-row {*/
+    /*    display: flex;*/
+    /*    justify-content: flex-end;*/
+    /*}*/
 </style>

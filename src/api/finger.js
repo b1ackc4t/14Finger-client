@@ -61,10 +61,14 @@ export function queryBatchFinger(urls, setting) {
     })
 }
 
-export function getBatchTask() {
+export function getBatchTask(pageSize, pageNum) {
     return requests({
         url: '/api/finger/batch/query',
         method: 'get',
+        params: {
+            page: pageNum,
+            size: pageSize,
+        }
     })
 }
 

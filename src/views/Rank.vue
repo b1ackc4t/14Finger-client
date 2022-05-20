@@ -66,7 +66,7 @@
                 }).catch((error) => {
                     console.log(error)
                     loading.value = false
-                    message.value.error("hacker！")
+                    message.value.error("服务端错误，请重试！")
                 })
             }
 

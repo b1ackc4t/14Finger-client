@@ -38,7 +38,7 @@
                     context.emit('reload')
                 }).catch((error) => {
                     console.log(error)
-                    message.value.error("hacker！不是管理员！")
+                    message.value.error("服务端错误，请重试！")
                 })
             }
 
@@ -50,7 +50,7 @@
                     context.emit('reload')
                 }).catch((error) => {
                     console.log(error)
-                    message.value.error("hacker！不是管理员！")
+                    message.value.error("服务端错误，请重试！")
                 })
             }
 
@@ -62,7 +62,7 @@
                     context.emit('delete_reload')
                 }).catch((error) => {
                     console.log(error)
-                    message.value.error("hacker！不是管理员！")
+                    message.value.error("服务端错误，请重试！")
                 })
             }
             return {

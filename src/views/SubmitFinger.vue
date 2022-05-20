@@ -97,6 +97,8 @@
                         appwatch.value = !appwatch.value
                         facwatch.value = !facwatch.value
 
+                    } else {
+                        message.value.error("请先登录")
                     }
                     loading.value = false
                 }).catch((error) => {
@@ -115,6 +117,8 @@
                 checkFinger(data.fingerInfo).then((res) => {
                     if (res.data.code === 200) {
                         message.value.success(res.data.data)
+                    } else {
+                        message.value.error("请先登录")
                     }
                     loading.value = false
                 }).catch((error) => {
@@ -166,6 +170,8 @@
                         appwatch.value = !appwatch.value
                         facwatch.value = !facwatch.value
 
+                    } else {
+                        message.value.error("请先登录")
                     }
                     loading.value = false
                 }).catch((error) => {

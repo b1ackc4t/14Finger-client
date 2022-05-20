@@ -57,7 +57,11 @@ const router = createRouter({
                 {
                     path: '/profile',
                     name: 'profile',
-                    component: () => import('../views/Profile.vue')
+                    component: () => import('../views/Profile.vue'),
+                    props: route => ({
+                        page: route.query.page,
+                        size: route.query.size,
+                    })
                 },
                 {
                     path: '/fingerManager',

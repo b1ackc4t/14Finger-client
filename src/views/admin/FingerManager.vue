@@ -15,7 +15,7 @@
                         <a-input-search v-model="search.value" :style="{width:'200px'}" placeholder="搜索" search-button @search="searchSubmit"/>
                     </a-space>
                 </div>
-                <a-table :columns="columns" :data="data.table_data" :pagination="false" @cell-click="enterFinger" class="mytable">
+                <a-table :columns="columns" :data="data.table_data" :pagination="false" @cell-click="enterFinger" class="mytable" column-resizable>
                     <template #is_right="{ record,rowIndex }">
                         <a-tag v-if="record.is_right" color="green">已审核</a-tag>
                         <a-tag v-else color="orangered">未审核</a-tag>
@@ -168,7 +168,7 @@
                 }).catch((error) => {
                     console.log(error)
                     loading.value = false
-                    message.value.error("hacker！不是管理员！")
+                    message.value.error("服务端错误，请重试！")
                 })
             }
 

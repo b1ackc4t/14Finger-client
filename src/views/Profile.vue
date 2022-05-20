@@ -6,7 +6,7 @@
                     平台批量扫描任务
                 </div>
                 <div>
-                    <a-table :columns="columns" :data="data.table_data" :pagination="true">
+                    <a-table :columns="columns" :data="data.table_data" :pagination="false" column-resizable>
                         <template #time="{ record,rowIndex }">
                             <span v-if="record.status === 'success'">{{record.all_time}}</span>
                             <span v-else>null</span>
@@ -14,7 +14,8 @@
                         </template>
                         <template #status="{ record,rowIndex }">
                             <a-tag v-if="record.status === 'success'" color="green">扫描已完成</a-tag>
-                            <a-tag v-else color="orangered">扫描中</a-tag>
+                            <a-tag v-else-if="record.status === 'scanning'" color="orangered">扫描中</a-tag>
+                            <a-tag v-else color="red">扫描失败</a-tag>
                         </template>
                         <template #action="{ record,rowIndex }">
                             <a-space>
@@ -28,6 +29,9 @@
                         </template>
                     </a-table>
                 </div>
+                <div class="last-row">
+                    <a-pagination :total="total" v-model:current="currentPage" v-model:page-size="pageSize" @change="changePage" show-total show-jumper/>
+                </div>
             </a-space>
 
         </a-spin>
@@ -38,10 +42,15 @@
     import {getMessage, timeFormat, timeFormat2} from "../utils";
     import {onMounted, reactive, ref} from "vue";
     import {getBatchTask, downloadBatchTask, deleteBatchTask} from "../api/finger.js";
+    import {useRouter} from "vue-router";
 
     export default {
         name: "Profile",
-        setup() {
+        props: {
+            page: Number,
+            size: Number,
+        },
+        setup(props) {
             const message = getMessage()
 
             const loading = ref(false)
@@ -50,14 +59,14 @@
                 {
                     title: '任务ID',
                     dataIndex: 'id',
-                    width: 100
+                    width: 90
                 },
                 {
                     title: '任务名称',
                     dataIndex: 'name',
                     ellipsis: true,
                     tooltip: true,
-                    width: 200
+                    width: 220
                 },
                 {
                     title: '任务大小',
@@ -127,15 +136,16 @@
                 }).catch((error) => {
                     console.log(error)
                     loading.value = false
-                    message.value.error("hacker！")
+                    message.value.error("服务端错误，请重试！")
                 })
             }
 
             const loadTasks = () => {
                 loading.value = true
-                getBatchTask().then((res) => {
+                getBatchTask(pageSize.value, currentPage.value).then((res) => {
                     if (res.data.code === 200) {
-                        data.tasks = res.data.data
+                        total.value = res.data.data.count
+                        data.tasks = res.data.data.results
                         let tmp = []
                         for (let item of data.tasks) {
                             let obj = {}
@@ -154,7 +164,7 @@
                 }).catch((error) => {
                     console.log(error)
                     loading.value = false
-                    message.value.error("hacker！")
+                    message.value.error("服务端错误，请重试！")
                 })
             }
 
@@ -163,20 +173,53 @@
             }
 
             onMounted(() => {
+                loadParam()
                 load()
             })
 
+            // 分页参数
+            const total = ref(0)
+            const pageSize = ref(10)
+            const currentPage = ref(1)
+            const router = useRouter()
+
+            const loadParam = () => {
+                if (props.page) {
+                    currentPage.value = props.page
+                }
+                if (props.size) {
+                    pageSize.value = props.size
+                }
+            }
+
+            const changePage = () => {
+                router.push({
+                    name: 'profile',
+                    query: {
+                        page: currentPage.value,
+                        size: pageSize.value,
+                    }
+                })
+                load()
+            }
             return {
                 data,
                 columns,
                 download,
                 deleteTask,
-                loading
+                loading,
+                currentPage,
+                total,
+                pageSize,
+                changePage
             }
         }
     }
 </script>
 
 <style scoped>
-
+    .last-row {
+        display: flex;
+        justify-content: flex-end;
+    }
 </style>

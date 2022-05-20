@@ -12,7 +12,7 @@
                         <a-input-search v-model="search.value" :style="{width:'200px'}" placeholder="搜索" search-button @search="load"/>
                     </a-space>
                 </div>
-                <a-table :columns="columns" :data="data.table_data" :pagination="false" @cell-click="enterFinger" class="mytable">
+                <a-table :columns="columns" :data="data.table_data" :pagination="false" @cell-click="enterFinger" class="mytable" column-resizable>
                     <template #action="{ record,rowIndex }">
                         <a-space>
                             <a-button type="primary" status="warning" size="mini" @click="handleClick(record)">编辑</a-button>
@@ -126,7 +126,7 @@
                 }).catch((error) => {
                     console.log(error)
                     loading.value = false
-                    message.value.error("hacker！不是管理员！")
+                    message.value.error("服务端错误，请重试！")
                 })
             }
 
@@ -159,7 +159,7 @@
                 }).catch((error) => {
                     console.log(error)
                     loading.value = false
-                    message.value.error("hacker！不是管理员！")
+                    message.value.error("服务端错误，请重试！")
                 })
                 visible.value = false;
             };
@@ -179,7 +179,7 @@
                 }).catch((error) => {
                     console.log(error)
                     loading.value = false
-                    message.value.error("hacker！不是管理员！")
+                    message.value.error("服务端错误，请重试！")
                 })
             }
 
