@@ -14,8 +14,7 @@
                         </template>
                         <template #status="{ record,rowIndex }">
                             <a-tag v-if="record.status === 'success'" color="green">扫描已完成</a-tag>
-                            <a-tag v-else-if="record.status === 'scanning'" color="orangered">扫描中</a-tag>
-                            <a-tag v-else color="red">扫描失败</a-tag>
+                            <a-tag v-else color="orangered">扫描中</a-tag>
                         </template>
                         <template #action="{ record,rowIndex }">
                             <a-space>
