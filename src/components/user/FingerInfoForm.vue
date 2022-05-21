@@ -29,7 +29,7 @@
             <a-form-item field="value" label="匹配值" required validate-trigger="blur">
                 <a-input v-model="form.value" placeholder="输入你要匹配的指纹值" />
                 <template #extra>
-                    <div>正则匹配区分大小写，关键字匹配不区分大小写</div>
+                    <div>不区分大小写</div>
                 </template>
             </a-form-item>
 <!--            测试url-->
