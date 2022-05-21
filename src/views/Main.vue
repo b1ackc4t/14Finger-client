@@ -217,7 +217,7 @@
                     isQuery.value = false
                     loading.value = false
                     if (error.response.status === 404) {
-                        message.value.error("请先登录")
+                        message.value.error("未登录或执行超时")
                     } else {
                         message.value.error(JSON.stringify(error.response.data.data))
                     }
